@@ -33,11 +33,11 @@
             android:id="@+id/ivMinusValuesCPL"
             android:layout_width="@dimen/_40sdp"
             android:layout_height="@dimen/_40sdp"
-            android:layout_toStartOf="@+id/edtCountCPL"
+            android:layout_toStartOf="@+id/tvCountCPL"
             android:background="@drawable/ic_minus" />
 
-        <EditText
-            android:id="@+id/edtCountCPL"
+        <TextView
+            android:id="@+id/tvCountCPL"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -45,7 +45,6 @@
             android:layout_marginEnd="@dimen/_10sdp"
             android:background="@drawable/button_gray_boarder"
             android:hint="1"
-            android:inputType="phone"
             android:paddingStart="@dimen/_25sdp"
             android:paddingTop="@dimen/_10sdp"
             android:paddingEnd="@dimen/_25sdp"
@@ -57,7 +56,7 @@
             android:id="@+id/ivAddValuesCPL"
             android:layout_width="@dimen/_40sdp"
             android:layout_height="@dimen/_40sdp"
-            android:layout_toEndOf="@+id/edtCountCPL"
+            android:layout_toEndOf="@+id/tvCountCPL"
             android:background="@drawable/ic_add" />
 
     </RelativeLayout>
