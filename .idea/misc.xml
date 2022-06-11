@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/practicaldemo/TrootechPractical/app/src/main/res/drawable/button_gray_boarder.xml" value="0.1465" />
+        <entry key="..\:/practicaldemo/TrootechPractical/app/src/main/res/drawable/ic_no_internet.xml" value="0.137" />
+        <entry key="..\:/practicaldemo/TrootechPractical/app/src/main/res/layout/activity_category_list.xml" value="0.1765625" />
+        <entry key="..\:/practicaldemo/TrootechPractical/app/src/main/res/layout/activity_main.xml" value="0.1625" />
+        <entry key="..\:/practicaldemo/TrootechPractical/app/src/main/res/layout/activity_no_internet.xml" value="0.22" />
+        <entry key="..\:/practicaldemo/TrootechPractical/app/src/main/res/layout/activity_splash.xml" value="0.10326086956521739" />
+        <entry key="..\:/practicaldemo/TrootechPractical/app/src/main/res/layout/activity_sub_category_list.xml" value="0.1765625" />
+        <entry key="..\:/practicaldemo/TrootechPractical/app/src/main/res/layout/custom_loading_dialog.xml" value="0.1765625" />
+        <entry key="..\:/practicaldemo/TrootechPractical/app/src/main/res/layout/custom_percentage_layout.xml" value="0.25" />
+        <entry key="..\:/practicaldemo/TrootechPractical/app/src/main/res/layout/header_view.xml" value="0.1765625" />
+        <entry key="..\:/practicaldemo/TrootechPractical/app/src/main/res/layout/row_main_category.xml" value="0.1765625" />
+        <entry key="..\:/practicaldemo/TrootechPractical/app/src/main/res/layout/row_sticky_header.xml" value="0.21" />
+        <entry key="..\:/practicaldemo/TrootechPractical/app/src/main/res/layout/row_sub_category_item.xml" value="0.1765625" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

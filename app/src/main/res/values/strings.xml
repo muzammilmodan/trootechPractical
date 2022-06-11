@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Trootech</string>
+    <string name="cancel_ttl">Cancel</string>
+    <string name="confirm_ttl">Confirm</string>
+</resources>

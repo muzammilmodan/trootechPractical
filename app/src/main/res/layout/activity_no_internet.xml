@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        tools:context=".activities.NoInternetActivity">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_114sdp"
+            android:src="@drawable/ic_no_internet" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_45sdp"
+            android:gravity="center"
+            android:paddingVertical="@dimen/_5sdp"
+            android:text="Oops, No Internet Connection"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_13sdp"
+            android:textStyle="bold" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="Make sure your WiFi or Cellular data is turned on to use the application."
+            android:textColor="@color/gray_bold"
+            android:textSize="@dimen/_12sdp" />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnRestartApp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:letterSpacing="0"
+            android:layout_marginTop="@dimen/_70sdp"
+            android:paddingVertical="@dimen/_10sdp"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:text="Restart App"
+            android:textColor="@color/white"
+            android:background="@color/teal_700"
+            android:paddingHorizontal="@dimen/_40sdp"
+            android:textAllCaps="false"
+            android:textSize="@dimen/_12ssp"
+            android:textStyle="bold"
+            app:elevation="@dimen/_10sdp" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</layout>
