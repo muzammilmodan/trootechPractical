@@ -6,8 +6,9 @@ import com.trootechdemo.restapi.Apis
 import retrofit2.Response
 import retrofit2.http.*
 
-
-//Todo: Stored all network regarding call, using suspend method thru handle API call.
+/**
+ * Stored all network regarding call, using suspend method thru handle API call.
+ **/
 interface ApiServices {
 
     @GET(Apis.CATEGORY_LIST)

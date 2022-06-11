@@ -29,7 +29,7 @@ class SubCategoryAdapter(val alSubCategory: List<SubCategoryResponseData>, var b
     }
 
     override fun bindHeaderData(header: View, headerPosition: Int) {
-        ((header as ConstraintLayout).getChildAt(headerPosition) as TextView).text =
+        ((header as ConstraintLayout).getChildAt(0) as TextView).text =
             alSubCategory[headerPosition].categoria.nombremenu
     }
 

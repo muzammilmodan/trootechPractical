@@ -45,7 +45,7 @@ class CategoryAdapter(
 
         mClickListener = btnListener
 
-
+//Main view item clicked listners,,,
         holder.binding.cnstMain.setOnClickListener {
             if (mClickListener != null) {
                 mClickListener?.onClicked(position)

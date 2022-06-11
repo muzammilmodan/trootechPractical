@@ -36,7 +36,7 @@ class CategoryViewModel @Inject constructor(
     }
 
     //Sub Category... Call....
-    //Using Live data thru observe api call
+    //Using Live data thru observe api call.. request and response and pass data to UI means View
     private val _responseMutableGetSubCategory: MutableLiveData<ApiCallback<SubCategoryResponse>> = MutableLiveData()
     val responseGetSubCategoryMain: LiveData<ApiCallback<SubCategoryResponse>> = _responseMutableGetSubCategory
 

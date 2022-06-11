@@ -23,7 +23,9 @@ import com.trootechdemo.ui.category.adtr.CategoryAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.header_view.view.*
 
-//As per Hilt required set Entry point, with-out entry point Hilt not working this screen and also application crash.
+/**
+ * As per Hilt required set Entry point, with-out entry point Hilt not working this screen and also application crash.
+ **/
 @AndroidEntryPoint
 class CategoryListActivity : BaseActivity() {
 
@@ -48,6 +50,7 @@ class CategoryListActivity : BaseActivity() {
     private fun init(){
         with(binding){
             incldHeader.rlHeaderMain.ivBack.visibility= View.GONE
+            incldHeader.rlHeaderMain.tvTitle.text="Category-"
         }
     }
 
@@ -55,11 +58,13 @@ class CategoryListActivity : BaseActivity() {
     private fun callGetCategoryListApi() {
         progress.show()
         mainViewModel.fetchCategoryListResponse()
+        /**
+         * Using Observer thru response handle..
+         * **/
         mainViewModel.responseGetCategoryMain.observe(this) { response ->
             when (response) {
                 is ApiCallback.OnSuccess -> {
                     progress.hide()
-                    Log.e("Main Size----=> ", "${response.data?.franquicias?.size}")
                     alFranquicias= ArrayList()
                     alFranquicias.addAll(response.data?.franquicias!!)
                     setCategoryView()
@@ -94,7 +99,7 @@ class CategoryListActivity : BaseActivity() {
         val linearLayoutManager = LinearLayoutManager(mContext)
         linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
         binding.rcVwCategoryACL.layoutManager = linearLayoutManager
-        binding.rcVwCategoryACL.adapter = adapterPeople
+        adapterPeople.also { binding.rcVwCategoryACL.adapter = it }
         adapterPeople.notifyDataSetChanged()
     }
 

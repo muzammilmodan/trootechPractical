@@ -22,24 +22,27 @@ import com.trootechdemo.stickyheaderexample.StickyHeaderItemDecoration
 import com.trootechdemo.stickyheaderexample.SubCategoryAdapter
 import com.trootechdemo.ui.common.BaseActivity
 import com.trootechdemo.utils.SessionManager
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.header_view.*
 import kotlinx.android.synthetic.main.header_view.view.*
 
-
+@AndroidEntryPoint
 class SubCategoryListActivity : BaseActivity() {
     val mainViewModel by viewModels<CategoryViewModel>()
 
     lateinit var binding: ActivitySubCategoryListBinding
     lateinit var mContext: Context
 
+    private lateinit var viewAdapter: RecyclerView.Adapter<*>
+    private lateinit var viewManager: RecyclerView.LayoutManager
+    private lateinit var alStickyList: ArrayList<SubCategoryResponseData>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_sub_category_list)
         mContext = this
 
-
         var selectCategoryKey = intent.getStringExtra("api_key")
-
 
         init()
 
@@ -51,7 +54,7 @@ class SubCategoryListActivity : BaseActivity() {
     fun init() {
         with(binding) {
             incldHeader.rlHeaderMain.ivBack.setOnClickListener { finish() }
-            intent.getStringExtra("cat_name").also { tvTitle.text = it }
+            intent.getStringExtra("cat_name").also { tvTitle.text = it } //Title name set category name
         }
     }
 
@@ -84,66 +87,60 @@ class SubCategoryListActivity : BaseActivity() {
         }
     }
 
-    private lateinit var viewAdapter: RecyclerView.Adapter<*>
-    private lateinit var viewManager: RecyclerView.LayoutManager
-    private lateinit var alStickyList: ArrayList<SubCategoryResponseData>
-
     private fun setSubCategoryView(alSorted: List<SubCategoryResponseData>) {
 
         var mainCategory: String = ""
         alStickyList = ArrayList()
 
         for (i in alSorted.indices) {
-            if (mainCategory.isEmpty()) {
-              //First time main header not  available so add first header in this object
-                mainCategory = alSorted[i].categoria.nombremenu //Main Category store
-                //Header view regarding data store
-                var categoryObject = alSorted[i]
-                categoryObject.header = true
-                alStickyList.add(categoryObject)
+            when {
+                mainCategory.isEmpty() -> { //First time main header not  available so add first header
+                    mainCategory = alSorted[i].categoria.nombremenu //Main Category store
+                    var categoryObject = alSorted[i]
+                    categoryObject.header = true
+                    alStickyList.add(categoryObject)
 
-                /*Header Wise sub child view regarding data store.
-                If first header not available so required store sub category values.
-                Because this sub category not add so first position values not show.
-                means replace Main header to sub category*/
-                var subCategoryObject = alSorted[i]
-                subCategoryObject.header = false
-                alStickyList.add(subCategoryObject) //Required means same main category values add also sub category.
+                    /**
+                     * Header Wise sub child view data store.
+                     **/
+                    var subCategoryObject = alSorted[i]
+                    subCategoryObject.header = false
+                    alStickyList.add(subCategoryObject) //Required means same main category values add also sub category.
+                }
+                alSorted[i].categoria.nombremenu != mainCategory -> {
+                    mainCategory = alSorted[i].categoria.nombremenu
 
-            } else if (alSorted[i].categoria.nombremenu != mainCategory) {
-                mainCategory = alSorted[i].categoria.nombremenu
+                    var categoryObject = alSorted[i]
+                    categoryObject.header = true
+                    alStickyList.add(categoryObject)
 
-                var categoryObject = alSorted[i]
-                categoryObject.header = true
-                alStickyList.add(categoryObject)
-
-            } else if (alSorted[i].categoria.nombremenu == mainCategory) {
-                mainCategory = alSorted[i].categoria.nombremenu
-                var categoryObject = alSorted[i]
-                categoryObject.header = false
-                alStickyList.add(categoryObject)
+                }
+                alSorted[i].categoria.nombremenu == mainCategory -> {
+                    mainCategory = alSorted[i].categoria.nombremenu
+                    var categoryObject = alSorted[i]
+                    categoryObject.header = false
+                    alStickyList.add(categoryObject)
+                }
             }
         }
 
         viewManager = LinearLayoutManager(this)
         viewAdapter = SubCategoryAdapter(alStickyList, object : RecyclerViewClickListener {
             override fun onClicked(position: Int) {
-                //var categoryValues = alStickyList[position]
                 showPercentageDialog(position)
             }
-
         })
         binding.rcVwSubCategoryASCL.apply {
             setHasFixedSize(true)
             layoutManager = viewManager
             adapter = viewAdapter
-        }
+        }//adapter values set
         binding.rcVwSubCategoryASCL.addItemDecoration(
             StickyHeaderItemDecoration(
                 binding.rcVwSubCategoryASCL,
                 viewAdapter as SubCategoryAdapter
             )
-        )
+        )//StickyHeader add
 
     }
 
@@ -161,15 +158,15 @@ class SubCategoryListActivity : BaseActivity() {
 
         val ivAddValuesCPL = dialog.findViewById(R.id.ivAddValuesCPL) as ImageView
         val ivMinusValuesCPL = dialog.findViewById(R.id.ivMinusValuesCPL) as ImageView
-        val edtCountCPL = dialog.findViewById(R.id.edtCountCPL) as EditText
+        val edtCountCPL = dialog.findViewById(R.id.tvCountCPL) as TextView
 
+        //Get Local data base thru first old sub category data...
         var alLocalList = SessionManager.getSubCategoryStatsData(mContext)
         if (alLocalList.isNotEmpty())
             for (mainPos in alStickyList.indices) {
                 for (locPos in alLocalList.indices) {
                     if (alStickyList[mainPos].idmenu == alLocalList[locPos].idmenu) {
-                        if (alLocalList[locPos].precioSugeridoValues == 0) alLocalList[locPos].precioSugeridoValues =
-                            1
+                        if (alLocalList[locPos].precioSugeridoValues == 0) alLocalList[locPos].precioSugeridoValues = 1
                         alStickyList[mainPos].precioSugeridoValues =
                             alLocalList[locPos].precioSugeridoValues
                     } else {
@@ -183,9 +180,7 @@ class SubCategoryListActivity : BaseActivity() {
                 1
         }
 
-
-
-
+        //With scope function thru set data.. object return subcategory.
         with(alStickyList[position]) {
             tvCategoryTitleCPL.text = categoria.nombremenu
             edtCountCPL.setText("${precioSugeridoValues}")
@@ -194,7 +189,7 @@ class SubCategoryListActivity : BaseActivity() {
                 "${alStickyList[position].precioSugeridoValues * alStickyList[position].precioSugerido.toFloat()}"
         }
 
-
+//If user confirm so add data in local preference other wise not store...
         tvConfirmCPL.setOnClickListener {
             var lastCount = edtCountCPL.text.toString()
             alStickyList[position].precioSugeridoValues = lastCount.toInt()
@@ -221,7 +216,7 @@ class SubCategoryListActivity : BaseActivity() {
             } else {
                 Toast.makeText(
                     this,
-                    "Values less then 1 not accepted.",
+                    "Value must be minimum of 1 number.",
                     Toast.LENGTH_SHORT
                 ).show()
             }
