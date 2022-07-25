@@ -1,12 +1,13 @@
-package com.trootechdemo.ui.common
+package com.kloeapp.ui.common
 
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import com.trootechdemo.R
-import com.trootechdemo.databinding.ActivityNoInternetBinding
+import com.kloeapp.R
+import com.kloeapp.databinding.ActivityNoInternetBinding
+import com.kloeapp.utils.Utils
 
 
 class NoInternetActivity : AppCompatActivity() {
@@ -15,6 +16,8 @@ class NoInternetActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        Utils.setStatusBarColor(this, R.color.white)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_no_internet)
 
         init()
